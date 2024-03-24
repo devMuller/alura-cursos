@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { uriAPI } from './api';
 
 const favoritosAPI = axios.create({
-  baseURL: 'http://localhost:8000/favoritos',
+  baseURL: `${uriAPI}/favoritos`,
 });
 
 const getFavoritos = async () => {

@@ -1,6 +1,9 @@
 import axios from 'axios';
+import { uriAPI } from './api';
 
-const livrosAPI = axios.create({ baseURL: 'http://localhost:8000/livros' });
+const livrosAPI = axios.create({
+  baseURL: `${uriAPI}/livros`,
+});
 
 const getLivros = async () => {
   const response = await livrosAPI.get('/');
