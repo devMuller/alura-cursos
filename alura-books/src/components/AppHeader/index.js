@@ -1,5 +1,6 @@
 //import './style.css';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Logo from '../Logo';
 import OpcoesHaeder from '../OpcoesHeader';
@@ -21,7 +22,9 @@ const Header = styled.header`
 const AppHeader = () => {
   return (
     <Header>
-      <Logo />
+      <Link to="/">
+        <Logo />
+      </Link>
       <OpcoesHaeder opcoes={textoOpcoes} />
       <IconesHeader icones={icones} />
     </Header>

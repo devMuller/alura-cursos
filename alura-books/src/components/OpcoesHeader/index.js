@@ -1,4 +1,5 @@
 //import './style.css';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Opcoes = styled.ul`
@@ -18,9 +19,11 @@ const OpcoesHaeder = ({ opcoes }) => {
   return (
     <Opcoes>
       {opcoes.map((opcao) => (
-        <Opcao>
-          <p>{opcao}</p>
-        </Opcao>
+        <Link to={`${opcao.toLowerCase()}`}>
+          <Opcao>
+            <p>{opcao}</p>
+          </Opcao>
+        </Link>
       ))}
     </Opcoes>
   );

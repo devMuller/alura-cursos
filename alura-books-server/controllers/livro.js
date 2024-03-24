@@ -40,7 +40,6 @@ const postLivro = (req, res) => {
       res.send(`Campo nome obrigatorio`);
       return;
     }
-
     const livroNovo = req.body;
     addLivro(livroNovo);
     res.status(201);

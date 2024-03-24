@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import Input from '../Input';
-import { useState } from 'react';
-
-import { livros } from './dadosPesquisa';
+import { useEffect, useState } from 'react';
+import { getLivros } from '../../services/livros';
+import { postFavorito, getFavoritos } from '../../services/favoritos';
+import imagemLivro from '../../imgs/livro.png';
 
 const PesquisaContainer = styled.section`
   background-image: linear-gradient(90deg, #002f52 35%, #326589 165%);
@@ -31,9 +32,18 @@ const Resultado = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+  width: 400px;
+  margin: 0 auto auto auto;
+  background-color: #ebecee;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  position: relative;
+  border-radius: 5px;
+
   cursor: pointer;
   p {
     width: 200px;
+    color: black;
   }
   img {
     width: 100px;
@@ -45,6 +55,38 @@ const Resultado = styled.div`
 
 const Pesquisa = () => {
   const [livrosPesquisados, setLivrosPesquisados] = useState([]);
+  const [livros, setLivros] = useState([]);
+
+  useEffect(() => {
+    fetchLivros();
+  }, []);
+
+  const fetchLivros = async () => {
+    const livrosAPI = await getLivros();
+    setLivros(livrosAPI);
+  };
+
+  const [favoritos, setFavoritos] = useState([]);
+
+  const fetchFavoritos = async () => {
+    const favoritosDaAPI = await getFavoritos();
+    setFavoritos(favoritosDaAPI);
+  };
+
+  useEffect(() => {
+    fetchFavoritos();
+  }, []);
+
+  const insertFavorito = async (id) => {
+    if (favoritos.filter((favorito) => favorito.id === id).length > 0) {
+      alert(`O livro de id: ${id} ja esta nos favoritos`);
+      return;
+    }
+    await postFavorito(id);
+    alert(`Livro de id: ${id} inserido`);
+
+    fetchFavoritos();
+  };
 
   return (
     <PesquisaContainer>
@@ -54,10 +96,10 @@ const Pesquisa = () => {
         type="text"
         placeholder="Escreva sua próxima leitura"
         onBlur={(e) => {
-          const textoDigitado = e.target.value;
+          const textoDigitado = e.target.value.toLowerCase();
 
           const resultadoPesquisa = livros.filter((livro) =>
-            livro.nome.includes(textoDigitado),
+            livro.nome.toLowerCase().includes(textoDigitado),
           );
           if (e.target.value != '') {
             setLivrosPesquisados(resultadoPesquisa);
@@ -67,9 +109,9 @@ const Pesquisa = () => {
         }}
       />
       {livrosPesquisados.map((livro) => (
-        <Resultado>
+        <Resultado onClick={() => insertFavorito(livro.id)}>
           <p>{livro.nome}</p>
-          <img src={livro.src} alt={livro.nome} />
+          <img src={imagemLivro} alt={livro.nome} />
         </Resultado>
       ))}
     </PesquisaContainer>
