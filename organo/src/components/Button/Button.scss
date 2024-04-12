@@ -1,0 +1,25 @@
+.button {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  background: #6278f7;
+  padding: 28px 32px;
+  border: none;
+  cursor: pointer;
+
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+
+  transition: color 250ms;
+  -webkit-transition: color 250ms;
+  -moz-transition: color 250ms;
+  -ms-transition: color 250ms;
+  -o-transition: color 250ms;
+
+  &:hover {
+    color: #95ffd4;
+  }
+}

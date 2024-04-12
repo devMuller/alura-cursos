@@ -1,0 +1,33 @@
+.roundButton {
+  background: #6278f7;
+  height: 75px;
+  width: 75px;
+  box-shadow: 7px 7px 15px 0px #00000014;
+  border: 2px solid #fff;
+  cursor: pointer;
+
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+
+  img {
+    width: 70%;
+    color: #fff;
+    filter: invert(100%) sepia(0%) saturate(7485%) hue-rotate(272deg)
+      brightness(108%) contrast(98%);
+    -webkit-filter: invert(100%) sepia(0%) saturate(7485%) hue-rotate(272deg)
+      brightness(108%) contrast(98%);
+  }
+
+  &:hover {
+    img {
+      color: #95ffd4;
+      filter: invert(83%) sepia(22%) saturate(598%) hue-rotate(99deg)
+        brightness(106%) contrast(101%);
+      -webkit-filter: invert(83%) sepia(22%) saturate(598%) hue-rotate(99deg)
+        brightness(106%) contrast(101%);
+    }
+  }
+}
