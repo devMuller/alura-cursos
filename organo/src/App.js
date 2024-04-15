@@ -1,47 +1,61 @@
 import { useState } from 'react';
 import Banner from './components/Banner';
-import Form from './components/Form';
+import TeamMemberForm from './components/TeamMemberForm';
+import TeamForm from './components/TeamForm';
 import Teams from './components/Teams';
 import Footer from './components/Footer';
+import Tabs from './components/Tabs';
+
+import { v4 as uuid } from 'uuid';
 
 function App() {
-  const teams = [
+  const [showForm, setShowForm] = useState(true);
+
+  const ShowForm = () => {
+    setShowForm(!showForm);
+  };
+
+  const [teams, setTeams] = useState([
     {
+      id: uuid(),
       name: 'Programação',
-      primaryColor: '#57C278',
-      secondaryColor: '#D9F7E9',
+      color: '#57C278',
     },
     {
+      id: uuid(),
       name: 'Front-End',
-      primaryColor: '#82CFFA',
-      secondaryColor: '#E8F8FF',
+      color: '#82CFFA',
     },
     {
+      id: uuid(),
       name: 'Data-Science',
-      primaryColor: '#A6D157',
-      secondaryColor: '#F0F8E2',
+      color: '#A6D157',
     },
     {
+      id: uuid(),
       name: 'DevOps',
-      primaryColor: '#E06B69',
-      secondaryColor: '#FDE7E8',
+      color: '#E06B69',
     },
     {
+      id: uuid(),
       name: 'UX e Design',
-      primaryColor: '#DB6EBF',
-      secondaryColor: '#FAE9F5',
+      color: '#DB6EBF',
     },
     {
+      id: uuid(),
       name: 'Mobile',
-      primaryColor: '#FFBA05',
-      secondaryColor: '#FFF5D9',
+      color: '#FFBA05',
     },
     {
+      id: uuid(),
       name: 'Inovação e Gestão',
-      primaryColor: '#FF8A29',
-      secondaryColor: '#FFEEDF',
+      color: '#FF8A29',
     },
-  ];
+  ]);
+
+  const newTeam = (team) => {
+    setTeams([...teams, team]);
+  };
 
   const [colaboradores, setColaboradores] = useState([]);
 
@@ -49,14 +63,52 @@ function App() {
     setColaboradores([...colaboradores, colaborador]);
   };
 
+  const deletarColaborador = (id) => {
+    setColaboradores(
+      colaboradores.filter((colaborador) => colaborador.id !== id),
+    );
+  };
+
+  const setTeamColor = (color, id) => {
+    setTeams(
+      teams.map((team) => {
+        if (team.id === id) {
+          team.color = color;
+        }
+        return team;
+      }),
+    );
+  };
+
+  const tabs = [
+    {
+      id: uuid(),
+      name: 'Membro',
+      tab: (
+        <TeamMemberForm
+          onSubmit={(colaborador) => novoColaborador(colaborador)}
+          teams={teams.map((team) => team.name)}
+        />
+      ),
+    },
+    {
+      id: uuid(),
+      name: 'Equipe',
+      tab: <TeamForm onSubmit={(team) => newTeam(team)} />,
+    },
+  ];
+
   return (
     <div className="App">
       <Banner />
-      <Form
-        onSubmit={(colaborador) => novoColaborador(colaborador)}
-        teams={teams.map((team) => team.name)}
+      {showForm ? <Tabs tabs={tabs} /> : ''}
+      <Teams
+        teams={teams}
+        teamsMembers={colaboradores}
+        onDelete={deletarColaborador}
+        changeColor={setTeamColor}
+        showForm={ShowForm}
       />
-      <Teams teams={teams} teamsMembers={colaboradores} />
       <Footer />
     </div>
   );

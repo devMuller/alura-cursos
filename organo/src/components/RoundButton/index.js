@@ -2,7 +2,7 @@ import './RoundButton.scss';
 
 const RoundButton = (props) => {
   return (
-    <button className="roundButton">
+    <button onClick={props.onClick} className="roundButton">
       <img src={props.img} alt={props.img} />
     </button>
   );

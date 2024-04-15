@@ -1,11 +1,12 @@
-import './Form.scss';
+import './TeamMemberForm.scss';
 import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import TextField from '../TextField';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
 
-const Form = (props) => {
+const TeamMemberForm = (props) => {
   const [name, setNome] = useState('');
   const [cargo, setCargo] = useState('');
   const [img, setImagem] = useState('');
@@ -14,6 +15,7 @@ const Form = (props) => {
   const onSave = (e) => {
     e.preventDefault();
     props.onSubmit({
+      id: uuid(),
       name,
       cargo,
       img,
@@ -62,4 +64,4 @@ const Form = (props) => {
   );
 };
 
-export default Form;
+export default TeamMemberForm;

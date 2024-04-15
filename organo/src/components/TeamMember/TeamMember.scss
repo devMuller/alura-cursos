@@ -4,17 +4,25 @@
   width: 262px;
   min-height: 269.33px;
   height: max-content;
-  background: linear-gradient(to bottom, #57c278 50%, #fff 50%);
+  background: linear-gradient(to bottom, #000 50%, #fff 50%);
   background-size: 100% 125%;
   background-position: right bottom;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+
+  .delete {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 
   .container-img {
     margin: 0 auto;
