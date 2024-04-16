@@ -1,75 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Banner from './components/Banner';
 import TeamMemberForm from './components/TeamMemberForm';
 import TeamForm from './components/TeamForm';
 import Teams from './components/Teams';
 import Footer from './components/Footer';
 import Tabs from './components/Tabs';
-
 import { v4 as uuid } from 'uuid';
+import { getTeams, postTeam, putTeam } from './services/teams';
+import { deleteMember, getMembers, postMember } from './services/members';
 
 function App() {
-  const [showForm, setShowForm] = useState(true);
+  const [teams, setTeams] = useState([]);
 
-  const ShowForm = () => {
-    setShowForm(!showForm);
-  };
-
-  const [teams, setTeams] = useState([
-    {
-      id: uuid(),
-      name: 'Programação',
-      color: '#57C278',
-    },
-    {
-      id: uuid(),
-      name: 'Front-End',
-      color: '#82CFFA',
-    },
-    {
-      id: uuid(),
-      name: 'Data-Science',
-      color: '#A6D157',
-    },
-    {
-      id: uuid(),
-      name: 'DevOps',
-      color: '#E06B69',
-    },
-    {
-      id: uuid(),
-      name: 'UX e Design',
-      color: '#DB6EBF',
-    },
-    {
-      id: uuid(),
-      name: 'Mobile',
-      color: '#FFBA05',
-    },
-    {
-      id: uuid(),
-      name: 'Inovação e Gestão',
-      color: '#FF8A29',
-    },
-  ]);
-
-  const newTeam = (team) => {
+  const newTeam = async (team) => {
     setTeams([...teams, team]);
+    await postTeam(team);
   };
 
-  const [colaboradores, setColaboradores] = useState([]);
+  const setTeamColor = async (color, id) => {
+    let team = teams.find((team) => team.id === id);
+    team.color = color;
 
-  const novoColaborador = (colaborador) => {
-    setColaboradores([...colaboradores, colaborador]);
-  };
-
-  const deletarColaborador = (id) => {
-    setColaboradores(
-      colaboradores.filter((colaborador) => colaborador.id !== id),
-    );
-  };
-
-  const setTeamColor = (color, id) => {
+    await putTeam(team);
     setTeams(
       teams.map((team) => {
         if (team.id === id) {
@@ -80,6 +32,44 @@ function App() {
     );
   };
 
+  const fetchTeams = async () => {
+    const apiTeams = await getTeams();
+    setTeams(apiTeams);
+  };
+
+  useEffect(() => {
+    fetchTeams();
+  }, []);
+
+  const [colaboradores, setColaboradores] = useState([]);
+
+  const novoColaborador = async (colaborador) => {
+    setColaboradores([...colaboradores, colaborador]);
+    await postMember(colaborador);
+  };
+
+  const deletarColaborador = async (id) => {
+    setColaboradores(
+      colaboradores.filter((colaborador) => colaborador.id !== id),
+    );
+    await deleteMember(id);
+  };
+
+  const fetchMember = async () => {
+    const apiMember = await getMembers();
+    setColaboradores(apiMember);
+  };
+
+  useEffect(() => {
+    fetchMember();
+  }, []);
+
+  const [showForm, setShowForm] = useState(true);
+
+  const ShowForm = () => {
+    setShowForm(!showForm);
+  };
+
   const tabs = [
     {
       id: uuid(),
@@ -87,7 +77,7 @@ function App() {
       tab: (
         <TeamMemberForm
           onSubmit={(colaborador) => novoColaborador(colaborador)}
-          teams={teams.map((team) => team.name)}
+          teams={teams}
         />
       ),
     },

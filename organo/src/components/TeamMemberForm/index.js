@@ -10,7 +10,7 @@ const TeamMemberForm = (props) => {
   const [name, setNome] = useState('');
   const [cargo, setCargo] = useState('');
   const [img, setImagem] = useState('');
-  const [team, setTime] = useState('');
+  const [team, setTeam] = useState({ id: '', name: '' });
 
   const onSave = (e) => {
     e.preventDefault();
@@ -19,12 +19,12 @@ const TeamMemberForm = (props) => {
       name,
       cargo,
       img,
-      team,
+      team: team.id,
     });
     setNome('');
     setCargo('');
     setImagem('');
-    setTime('');
+    setTeam({ id: '', name: '' });
   };
 
   return (
@@ -55,8 +55,8 @@ const TeamMemberForm = (props) => {
           req={true}
           label="Time"
           options={props.teams}
-          value={team}
-          setValue={(value) => setTime(value)}
+          value={team.name}
+          setValue={(value) => setTeam(value)}
         />
         <Button>Criar Card</Button>
       </form>

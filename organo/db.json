@@ -1,0 +1,35 @@
+{
+  "equipes": [
+    {
+      "id": "28bbed7b-1005-4555-a6a8-52f4452af055",
+      "name": "Programação",
+      "color": "#00a81c"
+    },
+    {
+      "id": "d0e14987-6e98-49f2-bc5b-e37a894da373",
+      "name": "DevOps",
+      "color": "#9a0404"
+    },
+    {
+      "id": "262b4eb3-1070-4052-821e-ec9723be3a62",
+      "name": "Mobile",
+      "color": "#d0880b"
+    }
+  ],
+  "membros": [
+    {
+      "id": "83ad24bc-9f54-469e-a37d-e556cb55ba52",
+      "name": "Teste da Silva",
+      "cargo": "Analista de Teste",
+      "img": "https://a-static.mlcdn.com.br/450x450/brinquedo-infantil-robo-c-sensor-de-movimento-luz-e-som-etitoys/petlamp/15946629363/e691e2ea5803fb280006dc26e01ed0e2.jpeg",
+      "team": "d0e14987-6e98-49f2-bc5b-e37a894da373"
+    },
+    {
+      "id": "8ff60957-d87e-47fd-a8d2-e26094fa0491",
+      "name": "Rafael Muller",
+      "cargo": "Desenvolvedor FullStack Junior",
+      "img": "https://i.imgur.com/UGKnmEi.jpeg",
+      "team": "28bbed7b-1005-4555-a6a8-52f4452af055"
+    }
+  ]
+}

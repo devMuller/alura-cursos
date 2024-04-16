@@ -2,6 +2,7 @@ import TeamMember from '../TeamMember';
 import styled from 'styled-components';
 import './Team.scss';
 import Values from 'values.js';
+import { useState } from 'react';
 
 const Title = styled.h3`
   font-size: 32px;
@@ -19,6 +20,20 @@ const Title = styled.h3`
 `;
 
 const Team = (props) => {
+  const [color, setColor] = useState('#ffffff');
+
+  const onChange = (e) => {
+    const newColor = new Values(e.target.value).rgb;
+
+    if (newColor[0] < 200 && newColor[1] < 200 && newColor[2] < 200) {
+      setColor('#FFFFFF');
+    } else {
+      setColor('#000000');
+    }
+
+    props.changeColor(e.target.value, team.id);
+  };
+
   const team = props.team;
   return (
     props.teamMembers.length > 0 && (
@@ -29,12 +44,15 @@ const Team = (props) => {
           backgroundImage: `url('/imgs/fundo.png')`,
         }}
       >
-        <input
-          type="color"
+        <div
           className="input-color"
-          value={team.color}
-          onChange={(e) => props.changeColor(e.target.value, team.id)}
-        />
+          style={{ backgroundColor: team.color, color: color }}
+        >
+          <label>
+            <p>Cor</p>
+            <input type="color" value={team.color} onChange={onChange} />
+          </label>
+        </div>
         <Title $color={team.color}>{team.name}</Title>
         <div className="team-body">
           {props.teamMembers.map((member) => {

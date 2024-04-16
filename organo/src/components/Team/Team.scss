@@ -7,6 +7,25 @@
     position: absolute;
     top: 20px;
     right: 40px;
+
+    display: flex;
+    flex-direction: column;
+    label {
+      cursor: pointer;
+      padding: 5px 15px;
+
+      display: flex;
+      flex-direction: column;
+      input {
+        position: absolute;
+        visibility: hidden;
+      }
+      p {
+        margin: 0 auto;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+    }
   }
 
   .team-body {
