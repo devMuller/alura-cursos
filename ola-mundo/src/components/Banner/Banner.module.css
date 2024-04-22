@@ -1,0 +1,114 @@
+.banner {
+  background-color: var(--azul-escuro);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 3rem 7.5rem 6.25rem;
+  color: var(--branco);
+  height: max-content;
+}
+
+.text {
+  height: max-content;
+}
+
+.title {
+  font-family: var(--fonte-secundaria);
+  font-size: 4rem;
+  margin-top: 4.875rem;
+  margin-bottom: 2rem;
+}
+
+.paragraph {
+  font-family: var(--fonte-secundaria);
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin-bottom: 2rem;
+}
+
+.imgs {
+  position: relative;
+  height: 406px;
+}
+
+.imgs > .imgCirculo {
+  position: absolute;
+  right: 7vw;
+  bottom: 2.2vw;
+  width: 18vw;
+}
+
+.imgs > .imgMinhaFoto {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 12vw;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+@media (max-width: 1100px) {
+  .banner {
+    padding: 3.5rem 1.5rem;
+  }
+
+  .title {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .paragraph {
+    margin-bottom: 1.5rem;
+  }
+
+  .imgs {
+    height: 338px;
+  }
+
+  .imgs > .imgMinhaFoto {
+    width: 25vw;
+  }
+
+  .imgs > .imgCirculo {
+    right: 10vw;
+    width: 35vw;
+  }
+}
+
+@media (max-width: 744px) {
+  .banner {
+    padding: 2rem 1rem;
+    display: block;
+  }
+
+  .title {
+    margin-bottom: 2rem;
+  }
+
+  .paragraph {
+    margin-bottom: 2rem;
+  }
+
+  .imgs {
+    height: 307px;
+  }
+
+  .imgs > .imgCirculo,
+  .imgs > .imgMinhaFoto {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  .imgs > .imgMinhaFoto {
+    width: 170px;
+    transform: translate(5rem, 0px);
+  }
+
+  .imgs > .imgCirculo {
+    width: 240px;
+    transform: translate(-1.5rem, 0px);
+  }
+}
